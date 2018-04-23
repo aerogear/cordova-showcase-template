@@ -5,7 +5,7 @@ export var metrics: MetricsService;
 
 // Create metrics
 export function initMetrics() {
-  let metricsConfig = config.getMetricsConfig();
+  let metricsConfig = config.getConfig(MetricsService.ID);
   metrics = new MetricsService(metricsConfig);
   metrics.sendAppAndDeviceMetrics().then((response) => {
     console.info("Response from metrics", response)
