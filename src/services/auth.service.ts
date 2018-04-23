@@ -1,17 +1,7 @@
 import { AuthService } from '@aerogear/auth';
-import { config } from "./config";
+import appConfig from "../mobile-services.json";
 
-var keycloakConfig = config.getConfig(AuthService.ID);
-
-var internalConfig
-if (!keycloakConfig) {
-  console.error("Keycloak configuration is missing. Authentication will not work properly.");
-  internalConfig = {};
-} else {
-  internalConfig = keycloakConfig.config;
-}
-
-export let INSTANCE = new AuthService(internalConfig);
+export let INSTANCE = new AuthService(appConfig);
 
 export let keycloakFactory = () => {
   return INSTANCE
