@@ -1,5 +1,7 @@
 import { AuthService } from '@aerogear/auth';
-import appConfig from "../mobile-services.json";
+
+declare var require: any
+let appConfig = require("../mobile-services.json");
 
 export let INSTANCE = new AuthService(appConfig);
 

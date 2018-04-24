@@ -1,5 +1,7 @@
 import { MetricsService } from '@aerogear/core';
-import appConfig from "../mobile-services.json";
+
+declare var require: any
+let appConfig = require("../mobile-services.json");
 
 export var metrics: MetricsService;
 
