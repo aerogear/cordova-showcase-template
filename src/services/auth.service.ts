@@ -1,9 +1,12 @@
 import { AuthService } from '@aerogear/auth';
+import { coreInstance } from '@aerogear/core';
 
 declare var require: any
 let appConfig = require("../mobile-services.json");
 
-export let INSTANCE = new AuthService(appConfig);
+coreInstance.init(appConfig);
+
+export let INSTANCE = new AuthService();
 
 export let keycloakFactory = () => {
   return INSTANCE
