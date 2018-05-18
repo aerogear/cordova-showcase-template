@@ -1,0 +1,10 @@
+{
+  "port": 4723,
+  "desiredCapabilities": {
+    "platformName": "Android",
+    "platformVersion": "P",
+    "deviceName": "Android Emulator",
+    "autoWebview": true,
+    "app": "platforms/android/app/build/outputs/apk/debug/app-debug.apk"
+  }
+}
