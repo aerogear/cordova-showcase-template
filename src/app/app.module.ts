@@ -19,6 +19,9 @@ import { authProvider } from '../services/auth.service';
 import { SecureStorage } from '@ionic-native/secure-storage';
 
 import { SideMenuContentComponent } from '../shared/side-menu-content/side-menu-content.component';
+import {PushPage} from "../pages/push/push";
+import {pushProvider} from "../services/push.service";
+import {Push} from "@ionic-native/push";
 
 
 @NgModule({
@@ -26,6 +29,7 @@ import { SideMenuContentComponent } from '../shared/side-menu-content/side-menu-
     MyApp,
     HomePage,
     AuthPage,
+    PushPage,
     AuthDetailsPage,
     AccessControlPage,
     DeviceTrustPage,
@@ -43,6 +47,7 @@ import { SideMenuContentComponent } from '../shared/side-menu-content/side-menu-
     MyApp,
     HomePage,
     AuthPage,
+    PushPage,
     AuthDetailsPage,
     AccessControlPage, 
     DeviceTrustPage,
@@ -54,8 +59,9 @@ import { SideMenuContentComponent } from '../shared/side-menu-content/side-menu-
     StatusBar,
     SplashScreen,
     authProvider,
+    pushProvider,
     SecureStorage,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {  
