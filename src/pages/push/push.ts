@@ -22,6 +22,16 @@ export class PushPage {
       },
       windows: {}
     });
+
+    this.pushObject.on('notification').subscribe(function(data) {
+      console.log("ON PUSH RECIEVER", JSON.stringify(data));
+    });
+
+    this.pushObject.on('error').subscribe(function(e) {
+      console.log("ERROR ON PUSH RECIEVER", JSON.stringify(e));
+    });
+
+
     this.pushObject.on('registration').subscribe(data => {
       console.log("Push registration event before");
       let INSTANCE = new PushRegistration();
