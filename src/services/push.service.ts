@@ -1,4 +1,4 @@
-import {Push} from "@ionic-native/push";
+import { Push } from "@ionic-native/push";
 
 declare var require: any;
 
