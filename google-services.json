@@ -1,46 +1,5 @@
 {
   "project_info": {
-    "project_number": "232465407725",
-    "firebase_url": "https://cordova-js-sdk.firebaseio.com",
-    "project_id": "cordova-js-sdk",
-    "storage_bucket": "cordova-js-sdk.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:232465407725:android:fb69acebfaeef82c",
-        "android_client_info": {
-          "package_name": "org.aerogear.js.showcase"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "232465407725-qghciobjfioief60a5j57d5r3srgpsfg.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "232465407725-qghciobjfioief60a5j57d5r3srgpsfg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDQcrzpJ7Zq26bOXdGHNanBqmQcvWseVg0"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+    "project_number": "INVALID_REPLACE THAT WITH YOUR CONFIG",
+  }
 }
