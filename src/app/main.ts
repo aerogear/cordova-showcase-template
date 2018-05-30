@@ -7,7 +7,7 @@ const platform = platformBrowserDynamic();
 platform.bootstrapModule(AppModule);
 
 if (window['cordova']) {
-  document.addEventListener("deviceready", initAuth, false);
+  //document.addEventListener("deviceready", initAuth, false);
 } else {
   // Init for the web
   initAuth();

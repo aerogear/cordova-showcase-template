@@ -14,6 +14,7 @@ import { StoragePage } from '../pages/security/storage/storage';
 import { SideMenuSettings } from './../shared/side-menu-content/models/side-menu-settings';
 import { SideMenuOption } from './../shared/side-menu-content/models/side-menu-option';
 import { SideMenuContentComponent } from './../shared/side-menu-content/side-menu-content.component';
+import {PushPage} from "../pages/push/push";
 
 @Component({
   templateUrl: 'app.html'
@@ -50,6 +51,8 @@ export class MyApp {
       { displayText: 'Home', component: HomePage, iconName: 'home' },
       { displayText: 'Authentication', component: AuthPage, iconName: 'lock' }
     );
+
+    this.pages.push({ displayText: 'Push', component: PushPage, iconName: 'home' });
 
     this.pages.push({
       displayText: 'Security',
