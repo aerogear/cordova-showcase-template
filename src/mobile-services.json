@@ -37,6 +37,10 @@
         "ios": {
           "variantId": "f85015b4-a762-49a7-a36f-34a451f819a4",
           "variantSecret": "978b35d6-7058-43b4-8c37-4dc30022ebda"
+        },
+        "android": {
+          "variantId": "795d5953-558c-4026-9407-194169fbf7fa",
+          "variantSecret": "92fd41dd-505b-4513-aaea-d02e27251695"
         }
       }
     }
