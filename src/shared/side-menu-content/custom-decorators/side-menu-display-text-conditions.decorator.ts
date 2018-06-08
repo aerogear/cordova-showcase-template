@@ -5,10 +5,10 @@ import { AppModule } from "../../../app/app.module";
 import { Events } from "ionic-angular";
 
 // SideMenuContentComponent
-import { SideMenuOptionSelectCondition, Matcher } from "../models/side-menu-option-select-condition";
+import { Matcher, SideMenuOptionSelectCondition } from "../models/side-menu-option-select-condition";
 import { SideMenuOptionSelect, SideMenuOptionSelectData } from "../models/side-menu-option-select-event";
 
-export function SideMenuDisplayTextConditions(conditions: Array<SideMenuOptionSelectCondition>) {
+export function SideMenuDisplayTextConditions(conditions: SideMenuOptionSelectCondition[]) {
 
     // Method that uses our events to tell the SideMenuContentComponent that
     // an option with the name sent should be marked as selected
@@ -28,9 +28,9 @@ export function SideMenuDisplayTextConditions(conditions: Array<SideMenuOptionSe
     function conditionIsMet(self: any, condition: SideMenuOptionSelectCondition): boolean {
         switch (condition.matcher) {
             case Matcher.ToBe:
-                return self[condition.propertyName] == condition.value;
+                return self[condition.propertyName] === condition.value;
             case Matcher.NotToBe:
-                return self[condition.propertyName] != condition.value;
+                return self[condition.propertyName] !== condition.value;
             case Matcher.ToEqual:
                 return self[condition.propertyName] === condition.value;
             case Matcher.NotToEqual:
@@ -54,15 +54,15 @@ export function SideMenuDisplayTextConditions(conditions: Array<SideMenuOptionSe
             case Matcher.ToBeNull:
                 return self[condition.propertyName] === null;
             case Matcher.ToContain:
-                return (<Array<any>>self[condition.propertyName]).indexOf(condition.value) > -1;
+                return (self[condition.propertyName] as any[]).indexOf(condition.value) > -1;
             case Matcher.ToMatch:
                 const regexp = new RegExp(condition.value);
-                return regexp.test(self[condition.propertyName])
+                return regexp.test(self[condition.propertyName]);
         }
     }
 
     // Method that returns the name of the option whose condition is satisfied
-    function checkConditions(self: any, conditions: Array<SideMenuOptionSelectCondition>): string {
+    function checkConditions(self: any, conditions: SideMenuOptionSelectCondition[]): string {
         let result = null;
         for (let i = 0; i < conditions.length; i++) {
             if (conditionIsMet(self, conditions[i])) {
@@ -73,13 +73,13 @@ export function SideMenuDisplayTextConditions(conditions: Array<SideMenuOptionSe
         return result;
     }
 
-    return function (constructor) {
+    return function(constructor) {
         const originalDidEnter = constructor.prototype.ionViewDidEnter;
 
-        constructor.prototype.ionViewDidEnter = function () {
+        constructor.prototype.ionViewDidEnter = function() {
 
             // Call the ionViewDidEnter event defined in the page
-            originalDidEnter && typeof originalDidEnter === 'function' && originalDidEnter.apply(this, arguments);
+            originalDidEnter && typeof originalDidEnter === "function" && originalDidEnter.apply(this, arguments);
 
             if (AppModule && AppModule.injector) {
                 if (conditions && conditions.length) {
@@ -89,17 +89,17 @@ export function SideMenuDisplayTextConditions(conditions: Array<SideMenuOptionSe
                     // If we could find one condition that is satisfied, tell
                     // the SideMenuContentComponent to select that option
                     if (optionNameToBeSelected) {
-                        selectOption(optionNameToBeSelected)
+                        selectOption(optionNameToBeSelected);
                     } else {
                         console.warn(`[SideMenuDisplayTextConditions]: No condition could be met.`);
                     }
                 } else {
-                    console.error('[SideMenuDisplayTextConditions]: You must provide an array of SideMenuOptionSelectCondition entities in order to use this decorator.');
+                    console.error("[SideMenuDisplayTextConditions]: You must provide an array of SideMenuOptionSelectCondition entities in order to use this decorator.");
                 }
             } else {
-                console.error('[SideMenuDisplayTextConditions]: You must make the injector to be available in the AppModule to use this decorator. Please take a look at [DOCS URL] for more information.');
+                console.error("[SideMenuDisplayTextConditions]: You must make the injector to be available in the AppModule to use this decorator. Please take a look at [DOCS URL] for more information.");
             }
-        }
-    }
+        };
+    };
 
 }

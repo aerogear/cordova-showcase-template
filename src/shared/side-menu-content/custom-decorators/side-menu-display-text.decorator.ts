@@ -9,13 +9,13 @@ import { SideMenuOptionSelect, SideMenuOptionSelectData } from "../models/side-m
 
 export function SideMenuDisplayText(displayText: string) {
 
-    return function (constructor) {
+    return function(constructor) {
         const originalDidEnter = constructor.prototype.ionViewDidEnter;
 
-        constructor.prototype.ionViewDidEnter = function () {
+        constructor.prototype.ionViewDidEnter = function() {
 
             // Call the ionViewDidEnter event defined in the page
-            originalDidEnter && typeof originalDidEnter === 'function' && originalDidEnter.apply(this, arguments);
+            originalDidEnter && typeof originalDidEnter === "function" && originalDidEnter.apply(this, arguments);
 
             if (AppModule && AppModule.injector) {
                 if (displayText) {
@@ -23,18 +23,17 @@ export function SideMenuDisplayText(displayText: string) {
                     const eventsCtrl = AppModule.injector.get(Events);
 
                     // Prepare the data that the SideMenuContentComponent expects
-                    const redirectData: SideMenuOptionSelectData = { displayText: displayText };
+                    const redirectData: SideMenuOptionSelectData = { displayText };
 
                     // Send the event with the data
                     eventsCtrl.publish(SideMenuOptionSelect, redirectData);
                 } else {
-                    console.error('[SideMenuDisplayText]: You must provide a name in order to use this decorator.');
+                    console.error("[SideMenuDisplayText]: You must provide a name in order to use this decorator.");
                 }
-            }
-            else {
-                console.error('[SideMenuDisplayText]: You must make the injector to be available in the AppModule to use this decorator. Please take a look at [DOCS URL] for more information.');
+            } else {
+                console.error("[SideMenuDisplayText]: You must make the injector to be available in the AppModule to use this decorator. Please take a look at [DOCS URL] for more information.");
             }
         };
-    }
+    };
 
 }

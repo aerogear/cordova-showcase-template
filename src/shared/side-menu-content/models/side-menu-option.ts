@@ -11,7 +11,7 @@ export interface SideMenuOption {
     // The name to display in the menu
     displayText: string;
 
-    // The badge option expects an Observable that allows 
+    // The badge option expects an Observable that allows
     // the application to dynamically update the value of the badge.
     badge?: Observable<any>;
 
@@ -27,5 +27,5 @@ export interface SideMenuOption {
     selected?: boolean;
 
     // List of sub items if any
-    suboptions?: Array<SideMenuOption>;
+    suboptions?: SideMenuOption[];
 }

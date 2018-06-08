@@ -1,33 +1,33 @@
-import { Component } from '@angular/core';
-import { Auth } from '@aerogear/auth';
-import { authProvider } from '../../../services/auth.service';
-import { ToastController } from 'ionic-angular';
-import { NavController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
+import { Auth } from "@aerogear/auth";
+import { Component } from "@angular/core";
+import { ToastController } from "ionic-angular";
+import { NavController } from "ionic-angular";
+import { LoadingController } from "ionic-angular";
+import { authProvider } from "../../../services/auth.service";
 
-import { Http } from '@angular/http';
+import { Http } from "@angular/http";
 
-import {RequestOptions} from '@angular/http';
-import {Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
+import {RequestOptions} from "@angular/http";
+import {Headers} from "@angular/http";
+import "rxjs/add/operator/map";
 declare let window: any;
 
 @Component({
-  selector: 'page-network',
-  templateUrl: 'network.html',
+  selector: "page-network",
+  templateUrl: "network.html",
   providers: [authProvider]
 })
 export class NetworkPage {
-  apiAccessRole: string;
-  progress: number;
-  headerConfig: object;
-  apiServerUrl: string;
-  apiEndpoint: string;
-  pinningSuccess: boolean;
-  responseRecieved: boolean;
-  requestSuccess: boolean;
-  requestFailure: boolean;
-  configuration: any;
+  public apiAccessRole: string;
+  public progress: number;
+  public headerConfig: object;
+  public apiServerUrl: string;
+  public apiEndpoint: string;
+  public pinningSuccess: boolean;
+  public responseRecieved: boolean;
+  public requestSuccess: boolean;
+  public requestFailure: boolean;
+  public configuration: any;
 
   constructor(public loadingCtrl: LoadingController, public toastCtrl: ToastController, private auth: Auth, public navCtrl: NavController, public http: Http) {
     this.auth = auth;
@@ -38,8 +38,8 @@ export class NetworkPage {
     this.http = http;
     this.apiAccessRole = "api-access";
     this.headerConfig = {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + this.auth.extract().token
+      "Accept": "application/json",
+      "Authorization": "Bearer " + this.auth.extract().token
     };
     this.apiServerUrl = this.configuration.apiServerUrl;
     this.apiEndpoint = this.configuration.apiEndpoint;
@@ -48,17 +48,17 @@ export class NetworkPage {
     this.requestFailure = false;
   }
 
-  sendRequest() {
-    let loader = this.loadingCtrl.create({
+  public sendRequest() {
+    const loader = this.loadingCtrl.create({
       content: "Checking Connection.."
     });
     loader.present();
 
-    let headers = new Headers(this.headerConfig);
-    let options = new RequestOptions({headers});
+    const headers = new Headers(this.headerConfig);
+    const options = new RequestOptions({headers});
 
-    var server = this.apiServerUrl;
-    var fingerprint = this.configuration.pinningFingerprint;
+    const server = this.apiServerUrl;
+    const fingerprint = this.configuration.pinningFingerprint;
 
     window.plugins.sslCertificateChecker.check(
             function() {
@@ -67,22 +67,22 @@ export class NetworkPage {
                 this.responseRecieved = true;
                 this.http.get(this.apiServerUrl + this.apiEndpoint, options).subscribe(res => {
                   console.log(res.status);
-                  if(res.status === 200) {
+                  if (res.status === 200) {
                     this.requestSuccess = true;
                   } else {
                     this.requestFailure = true;
                   }
                 }, err => {
-                  this.requestFailure = true
+                  this.requestFailure = true;
                 });
             }.bind(this),
             function(message) {
               loader.dismiss();
-              if (message == "CONNECTION_NOT_SECURE") {
-                let toast = this.toastCtrl.create({
-                   message: 'Connection Not Secure.',
+              if (message === "CONNECTION_NOT_SECURE") {
+                const toast = this.toastCtrl.create({
+                   message: "Connection Not Secure.",
                    duration: 10000,
-                   position: 'bottom'
+                   position: "bottom"
                  });
 
                 toast.present();

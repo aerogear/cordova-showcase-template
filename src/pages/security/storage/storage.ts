@@ -1,82 +1,82 @@
-import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
-import { StorageService } from '../../../services/storage.service';
-import { AlertController } from 'ionic-angular';
-import { SecurityService, SecurityCheckType, SecurityCheckResult } from '@aerogear/security';
+import { SecurityCheckResult, SecurityCheckType, SecurityService } from "@aerogear/security";
+import { Component } from "@angular/core";
+import { NavController, ToastController } from "ionic-angular";
+import { AlertController } from "ionic-angular";
+import { StorageService } from "../../../services/storage.service";
 
 @Component({
-  selector: 'page-storage',
-  templateUrl: 'storage.html',
+  selector: "page-storage",
+  templateUrl: "storage.html",
   providers: [StorageService]
 })
 export class StoragePage {
-  notes: any;
-  securityService: SecurityService;
+  public notes: any;
+  public securityService: SecurityService;
 
   constructor(private storageService: StorageService, public navCtrl: NavController, public alertCtrl: AlertController, private toastCtrl: ToastController) {
-    this.storageService = storageService
+    this.storageService = storageService;
     this.alertCtrl = alertCtrl;
     this.notes = [];
     this.securityService = new SecurityService();
     }
 
-  listNotes() {
+  public listNotes() {
     this.storageService.getNotes().then((notes) => {
       this.notes = notes;
     })
     .catch((err) => console.error("Error retrieving notes", err));
   }
 
-  createNote(title: string, content: string) {
+  public createNote(title: string, content: string) {
     this.storageService.createNote(title, content).then((notes) => {
       this.listNotes();
     });
   }
 
-  deviceLockCheck() {
+  public deviceLockCheck() {
     this.securityService.check(SecurityCheckType.hasDeviceLock)
     .then((deviceLockEnabled: SecurityCheckResult) => {
       if (!deviceLockEnabled.passed) {
         this.deviceLockToast();
-      }else{
+      } else {
         this.showCreateModal();
       }
     });
   }
 
-  deviceLockToast(){
+  public deviceLockToast() {
     this.toastCtrl.create({
       message: "No Device Lock Detected. Enable to use Storage",
-      duration: 3000,
+      duration: 3000
     }).present();
   }
 
-  showCreateModal() {
-    let alert = this.alertCtrl.create({
-      title: 'Create Secure Note',
+  public showCreateModal() {
+    const alert = this.alertCtrl.create({
+      title: "Create Secure Note",
       inputs: [
         {
-          name: 'title',
-          placeholder: 'Title'
+          name: "title",
+          placeholder: "Title"
         },
         {
-          name: 'content',
-          placeholder: 'Content'
+          name: "content",
+          placeholder: "Content"
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
+          text: "Cancel",
+          role: "cancel",
           handler: data => {
-            console.log('Cancel clicked');
+            console.log("Cancel clicked");
           }
         },
         {
-          text: 'Create',
+          text: "Create",
           handler: data => {
             if (data.title) {
-              this.createNote(data.title, data.content)
+              this.createNote(data.title, data.content);
             } else {
               // invalid login
               return false;
@@ -88,16 +88,16 @@ export class StoragePage {
     alert.present();
   }
 
-  readNote(note: any) {
-  let alert = this.alertCtrl.create({
+  public readNote(note: any) {
+  const alert = this.alertCtrl.create({
       title: note.title,
       subTitle: note.content,
-      buttons: ['Dismiss']
+      buttons: ["Dismiss"]
     });
-    alert.present();
+  alert.present();
   }
 
-  ionViewDidEnter(): void {
+  public ionViewDidEnter(): void {
     this.listNotes();
   }
 

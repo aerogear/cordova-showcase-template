@@ -1,9 +1,54 @@
 {
+  "extends": "tslint:recommended",
   "rules": {
+    "jsdoc-format":false,
     "no-duplicate-variable": true,
-    "no-unused-variable": [
-      true
-    ]
+    "no-angle-bracket-type-assertion": true,
+    "quotemark": [
+      true,
+      "double"
+    ],
+    "only-arrow-functions": [
+      false
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "arrow-parens": false,
+    "object-literal-sort-keys": false,
+    "object-literal-key-quotes": [
+      false
+    ],
+    "max-classes-per-file": [
+      false
+    ],
+    "max-line-length": [
+      false
+    ],
+    "no-console": [
+      false
+    ],
+    "no-var-requires": false,
+    "member-ordering": false,
+    "no-shadowed-variable": false,
+    "prefer-for-of": false,
+    "no-unused-expression": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
+    "no-unused-variable": true,
+    "interface-name": [
+      false
+    ],
+    "indent": [true, "spaces", 2]
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules"

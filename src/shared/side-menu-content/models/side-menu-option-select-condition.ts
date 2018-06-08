@@ -5,7 +5,7 @@
 // passing the displayText of an option, we would need
 // to give the decorator some information about how it
 // should check which option from the side menu should
-// be marked as selected based on a property from 
+// be marked as selected based on a property from
 // the component
 // ---------------------------------------------------
 
@@ -34,7 +34,7 @@ export interface SideMenuOptionSelectCondition {
     // check its value against the value
     propertyName: string;
 
-    // The value that the property with name propertyName 
+    // The value that the property with name propertyName
     // should have mark this option as selected
     value?: any;
 
@@ -42,7 +42,7 @@ export interface SideMenuOptionSelectCondition {
     // to be checked to figure out if the condition is satisfied
     matcher: Matcher;
 
-    // The displayText of the option from the side menu 
+    // The displayText of the option from the side menu
     // that should be marked as selected if the condition is satisfied
     displayText: string;
 }

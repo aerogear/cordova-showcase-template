@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
-import { SecurityService, SecurityCheckType, SecurityCheckResult } from '@aerogear/security';
-import { SecurityCheckResultMetric } from '@aerogear/security';
+import { SecurityCheckResult, SecurityCheckType, SecurityService } from "@aerogear/security";
+import { SecurityCheckResultMetric } from "@aerogear/security";
+import { Component } from "@angular/core";
+import { NavController, ToastController } from "ionic-angular";
 
 @Component({
-  selector: 'page-deviceTrust',
-  templateUrl: 'deviceTrust.html'
+  selector: "page-deviceTrust",
+  templateUrl: "deviceTrust.html"
 })
 export class DeviceTrustPage {
-  detections: Array<{label: string, detected: boolean}>;
-  trustScore: number;
-  totalTests: number;
-  totalDetections: number;
-  securityService: SecurityService;
+  public detections: Array<{label: string, detected: boolean}>;
+  public trustScore: number;
+  public totalTests: number;
+  public totalDetections: number;
+  public securityService: SecurityService;
 
   constructor(public navCtrl: NavController, private toastCtrl: ToastController) {
     this.detections = [];
@@ -22,28 +22,28 @@ export class DeviceTrustPage {
     this.securityService = new SecurityService();
   }
 
-  performChecks() {
-    this.detectRoot(); 
+  public performChecks() {
+    this.detectRoot();
     this.detectEmulator();
     this.detectDebug();
     this.detectDeviceLock();
   }
 
-  performChecksAndPublishMetrics(): Promise<SecurityCheckResult[]> {
+  public performChecksAndPublishMetrics(): Promise<SecurityCheckResult[]> {
     return this.securityService.checkManyAndPublishMetric(SecurityCheckType.notDebugMode,
       SecurityCheckType.notRooted,
       SecurityCheckType.notEmulated,
       SecurityCheckType.hasDeviceLock);
   }
 
-  addDetection(label: string, isSecure: boolean) {
+  public addDetection(label: string, isSecure: boolean) {
     this.totalTests++;
 
-    if(!isSecure) {
+    if (!isSecure) {
       this.totalDetections++;
     }
 
-    this.detections.push({label: label, detected: isSecure});
+    this.detections.push({label, detected: isSecure});
     this.trustScore = (100 - (((this.totalDetections / this.totalTests) * 100)));
   }
 
@@ -51,11 +51,11 @@ export class DeviceTrustPage {
   /**
   * Detect if the device is running on an emulator.
   */
-  detectEmulator(): void {
+  public detectEmulator(): void {
     this.securityService.check(SecurityCheckType.notEmulated)
       .then((isEmulated: SecurityCheckResult) => {
         const emulatedMsg = isEmulated.passed ? "Emulator Not Detected" : "Emulator Detected";
-        this.addDetection(emulatedMsg, isEmulated.passed)
+        this.addDetection(emulatedMsg, isEmulated.passed);
       }).catch((err: Error) => console.log(err));
   }
   // end::detectEmulator[]
@@ -64,7 +64,7 @@ export class DeviceTrustPage {
   /**
   * Detect if the device is running Root.
   */
-  detectRoot(): void {
+  public detectRoot(): void {
     this.securityService.check(SecurityCheckType.notRooted)
       .then((isRooted: SecurityCheckResult) => {
         const rootedMsg = isRooted.passed ? "Root Access Not Detected" : "Root Access Detected";
@@ -77,7 +77,7 @@ export class DeviceTrustPage {
   /**
   * Detect if the app is running in debug mode.
   */
-  detectDebug(): void {
+  public detectDebug(): void {
     this.securityService.check(SecurityCheckType.notDebugMode)
       .then((isDebugger: SecurityCheckResult) => {
         const debuggerMsg = isDebugger.passed ? "Debug Mode Not Detected" : "Debug Mode Detected";
@@ -90,7 +90,7 @@ export class DeviceTrustPage {
   /**
   * Detect if a system device lock is set.
   */
-  detectDeviceLock() {
+  public detectDeviceLock() {
     this.securityService.check(SecurityCheckType.hasDeviceLock)
       .then((deviceLockEnabled: SecurityCheckResult) => {
         const deviceLockMsg = deviceLockEnabled.passed ? "Device Lock Detected" : "Device Lock Not Detected";
@@ -99,7 +99,7 @@ export class DeviceTrustPage {
   }
   // end::detectDeviceLock[]
 
-  ionViewDidEnter(): void {
+  public ionViewDidEnter(): void {
     this.performChecks();
     this.performChecksAndPublishMetrics()
       .then((results: SecurityCheckResultMetric[]) => this.toastCtrl.create({

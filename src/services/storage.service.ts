@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+import { Injectable } from "@angular/core";
+import { Component } from "@angular/core";
+import { SecureStorage, SecureStorageObject } from "@ionic-native/secure-storage";
+import { AlertController } from "ionic-angular";
 
 @Injectable()
 @Component({
@@ -11,9 +11,9 @@ import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage
  * Contains properties of the Storage Service.
  */
 export class StorageService {
-  notes: Array<{title: string, content: string}>;
-  KEYSTORE_ALIAS: string = "keystore_mobile";
-  secureStorageObject: SecureStorageObject;
+  public notes: Array<{title: string, content: string}>;
+  public KEYSTORE_ALIAS: string = "keystore_mobile";
+  public secureStorageObject: SecureStorageObject;
 
   /**
   * @param alertCtrl The ionic alert controller
@@ -28,7 +28,7 @@ export class StorageService {
     });
   }
 
-  getNotes() {
+  public getNotes() {
     return new Promise((resolve, reject) => {
       this.secureStorageObject.get(this.KEYSTORE_ALIAS)
         .then(
@@ -38,9 +38,9 @@ export class StorageService {
     });
   }
 
-  createNote(title: string, content: string) {
-    var keystoreItems: any;
-    var newNote = {title: title, content: content};
+  public createNote(title: string, content: string) {
+    let keystoreItems: any;
+    const newNote = {title, content};
 
     return new Promise((resolve, reject) => {
     this.getNotes().then((notes) => {

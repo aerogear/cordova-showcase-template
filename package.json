@@ -7,7 +7,8 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
+    "lint": "tslint --force \"src/**/*.ts\"",
+    "lint:fix": "tslint --fix --force \"src/**/*.ts\"",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "ionic:android": "ionic cordova run android --emulator --no-fetch",
@@ -16,7 +17,7 @@
   },
   "dependencies": {
     "@aerogear/app": "^0.4.0",
-    "@aerogear/auth": "^0.4.0",
+    "@aerogear/auth": "^0.3.0",
     "@aerogear/cordova-plugin-aerogear-metrics": "^0.4.0",
     "@aerogear/cordova-plugin-aerogear-push": "^0.4.0",
     "@aerogear/cordova-plugin-aerogear-security": "^0.4.0",
@@ -66,6 +67,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
+    "tslint": "^5.10.0",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",

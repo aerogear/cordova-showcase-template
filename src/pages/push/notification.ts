@@ -1,4 +1,4 @@
 export interface PushNotification {
-    message: string,
-    received: string
+    message: string;
+    received: string;
 }

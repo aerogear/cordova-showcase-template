@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import {NavController, Platform} from 'ionic-angular';
-import { authProvider } from '../../services/auth.service';
+import { Auth } from "@aerogear/auth";
+import { Component } from "@angular/core";
+import {NavController, Platform} from "ionic-angular";
+import { authProvider } from "../../services/auth.service";
 import {PushService} from "../../services/push.service";
 import {PushNotification} from "../push/notification";
 import {PushPage} from "../push/push";
-import { Auth } from '@aerogear/auth';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: "page-home",
+  templateUrl: "home.html",
   providers: [authProvider]
 })
 export class HomePage {
@@ -21,7 +21,7 @@ export class HomePage {
     });
   }
 
-  addNotification(notification: PushNotification) {
+  public addNotification(notification: PushNotification) {
     console.debug(`Received push notification: ${notification.message}`);
     const currentPage = this.navCtrl.getActive(true).name;
 

@@ -1,5 +1,5 @@
-import { ToastController } from 'ionic-angular';
 import {Injectable} from "@angular/core";
+import { ToastController } from "ionic-angular";
 
 /**
  * Wraps the ionic ToastController and provider a simplified interface to trigger
@@ -10,21 +10,21 @@ export class SimpleToastService {
   constructor(public toastCtrl: ToastController) {
   }
 
-  showSuccess(msg: string, position: string = 'top') {
+  public showSuccess(msg: string, position: string = "top") {
     this.toastCtrl.create({
       message: msg,
       duration: 5000,
-      position: position,
-      cssClass: 'toast-success'
+      position,
+      cssClass: "toast-success"
     }).present();
   }
 
-  showError(msg: string, position: string = 'top') {
+  public showError(msg: string, position: string = "top") {
     this.toastCtrl.create({
       message: msg,
       duration: 5000,
-      position: position,
-      cssClass: 'toast-error'
+      position,
+      cssClass: "toast-error"
     }).present();
   }
 }

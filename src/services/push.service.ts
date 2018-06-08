@@ -1,8 +1,8 @@
-import {Push, PushObject} from "@ionic-native/push";
-import {Injectable} from "@angular/core";
-import {SimpleToastService} from "./toast.service";
 import { PushRegistration } from "@aerogear/push";
+import {Injectable} from "@angular/core";
+import {Push, PushObject} from "@ionic-native/push";
 import {PushNotification} from "../pages/push/notification";
+import {SimpleToastService} from "./toast.service";
 
 const PUSH_ALIAS = "cordova";
 
@@ -15,8 +15,8 @@ export class PushService {
   public static registered: boolean = false;
 
   // We want one single instance & callback app wide
-  static pushObject: PushObject = null;
-  static callback: (notification: PushNotification) => void;
+  public static pushObject: PushObject = null;
+  public static callback: (notification: PushNotification) => void;
 
   public messages: PushNotification[] = [];
 
@@ -57,12 +57,12 @@ export class PushService {
   }
 
   public register() {
-    PushService.pushObject.on('error').subscribe(err => {
+    PushService.pushObject.on("error").subscribe(err => {
       console.error(`Error configuring push notifications: ${err.message}`);
     });
 
     // Invokes the UPS registration endpoint
-    PushService.pushObject.on('registration').subscribe(data => {
+    PushService.pushObject.on("registration").subscribe(data => {
       new PushRegistration().register(data.registrationId, PUSH_ALIAS).then(() => {
         PushService.registered = true;
         this.toast.showSuccess("Push registration successful", "bottom");
@@ -71,7 +71,7 @@ export class PushService {
       });
     });
 
-    PushService.pushObject.on('notification').subscribe(notification => {
+    PushService.pushObject.on("notification").subscribe(notification => {
       const newNotification = {
         message: notification.message,
         received: new Date().toDateString()

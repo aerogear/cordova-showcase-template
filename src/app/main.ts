@@ -1,12 +1,12 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from '../app/app.module';
-import { INSTANCE } from "../services/auth.service"
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { AppModule } from "../app/app.module";
+import { INSTANCE } from "../services/auth.service";
 
 const platform = platformBrowserDynamic();
 // Init angular
 platform.bootstrapModule(AppModule);
 
-if (window['cordova']) {
+if ((window as any).cordova) {
   document.addEventListener("deviceready", initAuth, false);
 } else {
   // Init for the web
@@ -19,9 +19,8 @@ if (window['cordova']) {
  */
 function initAuth() {
   INSTANCE.init({}).then(() => {
-    console.info("Initialized auth SDK")
+    console.info("Initialized auth SDK");
   }).catch((err) => {
-    console.error("Problem with auth init", err)
+    console.error("Problem with auth init", err);
   });
 }
-

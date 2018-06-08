@@ -1,13 +1,13 @@
-import { Auth } from '@aerogear/auth';
-import { init } from '@aerogear/app';
-declare var require: any
-let appConfig = require("../mobile-services.json");
+import { init } from "@aerogear/app";
+import { Auth } from "@aerogear/auth";
+declare var require: any;
+const appConfig = require("../mobile-services.json");
 init(appConfig);
 
 export let INSTANCE = new Auth();
 
 export let keycloakFactory = () => {
-  return INSTANCE
+  return INSTANCE;
 };
 
 export let authProvider = {
@@ -15,6 +15,3 @@ export let authProvider = {
   useFactory: keycloakFactory,
   deps: []
 };
-
-
-
