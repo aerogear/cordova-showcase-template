@@ -18,10 +18,17 @@ if (window['cordova']) {
  * This will reload angular context again
  */
 function initAuth() {
-  INSTANCE.init({}).then(() => {
+  window['handleOpenURL'] = function (url) {
+    if(url.indexOf("login") !== -1 ){
+      INSTANCE.continueLogin(url);
+    }
+    else if (url.indexOf("logout") !== -1) {
+      INSTANCE.continueLogout();
+    }
+  }
+  INSTANCE.init({ adapter: "default" }).then(() => {
     console.info("Initialized auth SDK")
   }).catch((err) => {
     console.error("Problem with auth init", err)
   });
 }
-
