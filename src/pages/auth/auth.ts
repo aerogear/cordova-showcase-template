@@ -12,6 +12,7 @@ import { AuthDetailsPage } from '../authDetails/authDetails';
 })
 export class AuthPage {
     authButtonState: boolean;
+    token: string;
 
     constructor(public toastCtrl: ToastController, private auth: Auth, public navCtrl: NavController, 
         public navParams: NavParams) {
@@ -22,8 +23,9 @@ export class AuthPage {
     }
 
     login() {
-        this.auth.login()
-            .then(() => this.navCtrl.setRoot(AuthDetailsPage));
+        this.auth.login({ redirectUri: "org.aerogear.js.showcase:/login"}).then(() => {
+            this.navCtrl.setRoot(AuthDetailsPage)
+        });
     }
 
     ionViewDidEnter(): void {
