@@ -92,7 +92,7 @@ node(platform) {
 
     stage("Archive") {
         if (platform == 'android') {
-            archiveArtifacts artifacts: "platforms/android/build/outputs/apk/android-${BUILD_CONFIG}.apk", excludes: 'platforms/android/build/outputs/apk/*-unaligned.apk'
+            archiveArtifacts artifacts: "platforms/android/app/build/outputs/apk/${BUILD_CONFIG}/app-${BUILD_CONFIG}.apk"
         }
         if (platform == 'ios') {
             archiveArtifacts artifacts: "platforms/${platform}/build/${OSX_BUILD_CONFIG}-${SDK}/${OUTPUT_FILE_NAME}"
