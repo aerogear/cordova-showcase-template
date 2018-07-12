@@ -55,11 +55,13 @@ To build the showcase app, run:
 npm install
 npm run ionic:build
 ```
-You can choose to run the application on android or ios.
+You can choose to run the application on android or ios or in the browser.
 ```
 npm run ionic:android // to run in an android
 
 npm run ionic:ios // to run in an ios
+
+npm run ionic:serve // to run in a browser
 ```
 
 ==== Troubleshooting
