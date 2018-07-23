@@ -69,16 +69,9 @@ npm run ionic:ios
 ```
 > **Note**: To run the app in an emulator, you must have an emulator currently running when entering the above command.
 
-## Work with Different Backend Services
+## Work with backend service
 
-By default the app will use the backend services that are running on [a dedicated OpenShift cluster](https://security.skunkhenry.com:8443) for demonstration purpose.
+By default application is not going to connect with any backend service. 
+Please follow documentation for each indivisual service:
 
-You can also configure the app to run against different backend services:
-
-1. Update the URLs in [mobile-services.json](src/mobile-services.json) file.
-2. If you are using HTTPS, update the SHA1 fingerprint of the server certificate configuration in the [mobile-services.json](src/mobile-services.json) file.
-
-To generate the SHA1 hash value of the certificate, you can use this command:
-```
-openssl s_client -servername <hostname> -connect <hostname:port> -showcerts < /dev/null 2>/dev/null   | openssl x509 -in /dev/stdin -sha1 -noout -fingerprint
-```
+https://docs.aerogear.org/aerogear/latest
