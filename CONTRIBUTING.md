@@ -72,6 +72,6 @@ npm run ionic:ios
 ## Work with backend service
 
 By default application is not going to connect with any backend service. 
-Please follow documentation for each indivisual service:
+To connect SDK with the backend please follow documentation for each individual service:
 
 https://docs.aerogear.org/aerogear/latest
