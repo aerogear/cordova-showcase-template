@@ -91,6 +91,6 @@
     <plugin name="cordova-plugin-aerogear-metrics" />
     <plugin name="cordova-plugin-aerogear-security" />
     <plugin name="cordova-plugin-aerogear-push" />
-    <engine name="android" spec="~7.1.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
+    <engine name="android" spec="~7.1.0" />
 </widget>

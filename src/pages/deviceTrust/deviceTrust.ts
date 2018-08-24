@@ -1,4 +1,4 @@
-import { SecurityCheckResult, SecurityCheckType, SecurityService } from "@aerogear/security";
+import { DeviceCheckResult, DeviceCheckType, SecurityService } from "@aerogear/security";
 import { Component } from "@angular/core";
 import { Dialogs } from "@ionic-native/dialogs";
 import { NavController } from "ionic-angular";
@@ -30,11 +30,11 @@ export class DeviceTrustPage {
       this.detectDebug()]);
   }
 
-  public performChecksAndPublishMetrics(): Promise<SecurityCheckResult[]> {
-    return this.securityService.checkManyAndPublishMetric(SecurityCheckType.notDebugMode,
-      SecurityCheckType.notRooted,
-      SecurityCheckType.notEmulated,
-      SecurityCheckType.hasDeviceLock);
+  public performChecksAndPublishMetrics(): Promise<DeviceCheckResult[]> {
+    return this.securityService.checkManyAndPublishMetric(DeviceCheckType.debugModeEnabled,
+      DeviceCheckType.rootEnabled,
+      DeviceCheckType.isEmulator,
+      DeviceCheckType.screenLockEnabled);
   }
 
   public addDetection(label: string, isSecure: boolean) {
@@ -52,35 +52,35 @@ export class DeviceTrustPage {
 
   // Detect if the device is running on an emulator.
   public detectEmulator(): Promise<any> {
-    return this.securityService.check(SecurityCheckType.notEmulated)
-      .then((isEmulated: SecurityCheckResult) => {
-        const emulatedMsg = isEmulated.passed ? "No Emulator Access Detected" : "Emulator Access Detected";
-        this.addDetection(emulatedMsg, isEmulated.passed);
+    return this.securityService.check(DeviceCheckType.isEmulator)
+      .then((isEmulated: DeviceCheckResult) => {
+        const emulatedMsg = isEmulated.passed ? "Emulator Access Detected" : "No Emulator Access Detected";
+        this.addDetection(emulatedMsg, !isEmulated.passed);
       }).catch((err: Error) => console.error(err));
   }
 
   // Detect if the device is running Root.
   public detectRoot(): Promise<any> {
-    return this.securityService.check(SecurityCheckType.notRooted)
-      .then((isRooted: SecurityCheckResult) => {
-        const rootedMsg = isRooted.passed ? "No Root Access Detected" : "Root Access Detected";
-        this.addDetection(rootedMsg, isRooted.passed);
+    return this.securityService.check(DeviceCheckType.rootEnabled)
+      .then((isRooted: DeviceCheckResult) => {
+        const rootedMsg = isRooted.passed ? "Root Access Detected" : "No Root Access Detected";
+        this.addDetection(rootedMsg, !isRooted.passed);
       }).catch((err: Error) => console.error(err));
   }
 
   // Detect if the app is running in debug mode.
   public detectDebug(): Promise<any> {
-    return this.securityService.check(SecurityCheckType.notDebugMode)
-      .then((isDebugger: SecurityCheckResult) => {
-        const debuggerMsg = isDebugger.passed ? "No Debugger Detected" : "Debugger Detected";
-        this.addDetection(debuggerMsg, isDebugger.passed);
+    return this.securityService.check(DeviceCheckType.debugModeEnabled)
+      .then((isDebugger: DeviceCheckResult) => {
+        const debuggerMsg = isDebugger.passed ? "Debugger Detected" : "No Debugger Detected";
+        this.addDetection(debuggerMsg, !isDebugger.passed);
       }).catch((err: Error) => console.error(err));
   }
 
   // Detect if a system device lock is set.
   public detectDeviceLock(): Promise<any> {
-    return this.securityService.check(SecurityCheckType.hasDeviceLock)
-      .then((deviceLockEnabled: SecurityCheckResult) => {
+    return this.securityService.check(DeviceCheckType.screenLockEnabled)
+      .then((deviceLockEnabled: DeviceCheckResult) => {
         const deviceLockMsg = deviceLockEnabled.passed ? "Device Lock Enabled " : "No Device Lock Enabled";
         this.addDetection(deviceLockMsg, deviceLockEnabled.passed);
       });
@@ -116,5 +116,4 @@ export class DeviceTrustPage {
     });
     this.performChecksAndPublishMetrics();
   }
-
 }
